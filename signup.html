@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- Code By Webdevtrick ( https://webdevtrick.com ) -->
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script language="javascript">
+
+        function check()
+        {
+        
+         if(document.form1.firstname.value=="")
+          {
+            alert("Plese Enter First Name");
+            document.form1.firstname.focus();
+            return false;
+        
+          }
+         
+         if(document.form1.lastname.value=="")
+          {
+            alert("Plese Enter Your Last Name");
+            document.form1.lastname.focus();
+            return false;
+          } 
+          if(document.form1.confirmpassword.value=="")
+          {
+            alert("Plese Enter Confirm Password");
+            document.form1.confirmpassword.focus();
+            return false;
+          }
+          if(document.form1.password.value!=document.form1.confirmpassword.value)
+          {
+            alert("Confirm Password does not matched");
+            document.form1.confirmpassword.focus();
+            return false;
+          }
+          
+          if(document.form1.email.value=="")
+          {
+            alert("Plese Enter your Email Address");
+            document.form1.email.focus();
+            return false;
+          }
+          e=document.form1.email.value;
+                f1=e.indexOf('@');
+                f2=e.indexOf('@',f1+1);
+                e1=e.indexOf('.');
+                e2=e.indexOf('.',e1+1);
+                n=e.length;
+        
+                if(!(f1>0 && f2==-1 && e1>0 && e2==-1 && f1!=e1+1 && e1!=f1+1 && f1!=n-1 && e1!=n-1))
+                {
+                    alert("Please Enter valid Email");
+                    document.form1.email.focus();
+                    return false;
+                }
+          }
+          
+        </script>
+
+  <meta charset="UTF-8">
+  <title>Bus Reservation</title>
+  <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="MyStyle.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="left-section">
+    <div class="header">
+      <h1 class="animation a1">Get Started Here !</h1>
+      <h4 class="animation a2">Sign Up for a Memorable Journey!!!</h4>
+    </div>
+    <form name="form1" action="signup.php" method="POST" onsubmit="return check();">
+    <div class="form">
+        <input type="text" class="form-field animation a3" placeholder="First Name" id="firstname" name="firstname">
+        <input type="text" class="form-field animation a4" placeholder="Last Name" id="lastname" name="lastname">
+        <input type="email" class="form-field animation a5" placeholder="Email ID" id="email" name="email">
+        <input type="password" class="form-field animation a6" placeholder="Password" id="password" name="password">
+        <input type="password" class="form-field animation a7" placeholder="Confirm Password" id="confirmpassword" name="confirmpassword">
+        <button type ="submit" class="animation a8" name="sub">SIGN UP</button>
+    </div>
+  </div>
+  <div class="right-section"></div>
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,95 @@
+.c1{
+width: 500px;
+height: 600px;
+margin: 0 auto; 
+float: none; 
+margin-bottom: 10px; margin-top: 10px;
+}
+.c2
+{
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+}
+.c3{
+    font-family: 'Arvo', serif;
+     padding-top: 10px; 
+     float: left;
+}
+.c4{
+    font-family: 'Arvo', serif; 
+    padding-top: 10px; 
+    float: right;
+}
+.c5{
+    font-family: 'Arvo', serif; 
+    padding-top: 50px;
+}
+.c6{
+    font-family: 'Arvo', serif;
+}
+.c7{
+    font-family: 'Arvo', serif;
+}
+.c8{
+    font-family: 'Arvo', serif; 
+    padding-top: 10px; 
+    float: left;
+}
+.c9{
+    font-family: 'Arvo', serif; 
+    padding-top: 10px; 
+    float: right;
+}
+.c10{
+    font-family: 'Arvo', serif; 
+    padding-top: 10px; 
+}
+.c11{
+font-family: 'Arvo', serif;
+}
+.c12{
+    width: 300px; 
+    margin-top: 20px; 
+    margin-left: 70px;
+}
+.cs1{
+    margin-right:5px;
+}
+.cs2{
+    margin-right:5px; 
+    margin-top:40px;
+}
+.cs3{
+    margin-right:5px; 
+    margin-top:20px;
+}
+
+@media screen and (max-width: 800px) {
+    .c8{
+        font-family: 'Arvo', serif; 
+        padding-top: 10px; 
+        float: left;
+        font-size: 3.5vw;
+    }
+    .c9{
+        font-family: 'Arvo', serif; 
+        padding-top: 10px; 
+        float: right;
+        font-size: 3.5vw;
+    }
+    .c10{
+        font-family: 'Arvo', serif; 
+        padding-top: 3px; 
+    }
+    .cs2{
+        margin-right:5px; 
+        margin-top:10px;
+    }
+    .c12{
+       width: 100%;
+       margin-left: 0%;
+       padding-left: 0%;
+    }
+
+
+}
