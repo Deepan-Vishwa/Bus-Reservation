@@ -1,37 +1,33 @@
 <?php
- session_start();
-extract($_POST);
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
-$dbname = 'qTVuzqyMJn';
-$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-         
-         if(! $conn ) {
-            die('Could not connect: ' . mysqli_error());
-         }
-         echo "connected";
+session_start();
+$host = "localhost"; /* Host name */
+$user = "root"; /* User */
+$password = ""; /* Password */
+$dbname = "qTVuzqyMJn"; /* Database name */
 
-if(isset($submit))
-{
-	$rs=mysqli_query($conn,"select * from db where email='$username' and pw='$password' and status=1");
-	if(mysqli_num_rows($rs)<1)
-	{
-        $found="N";
-        echo "invalid";
-	}
-	else
-	{
-                session_start();
-		$_SESSION["login"]=$username;
-	}
+$con = mysqli_connect($host, $user, $password,$dbname);
+// Check connection
+if (!$con) {
+  die("Connection failed: " . mysqli_connect_error());
 }
-if (isset($_SESSION["login"]))
-{
 
-        header("location: main_page.php");
-//echo "<h1 align=center>Hye you are sucessfully login!!!</h1>";
-//exit;
+
+$uname = mysqli_real_escape_string($con,$_POST['username']);
+$password = mysqli_real_escape_string($con,$_POST['password']);
+
+if ($uname != "" && $password != ""){
+
+    $sql_query = "select count(*) as cntUser from db where email='".$uname."' and pw='".$password."' and status=1";
+    $result = mysqli_query($con,$sql_query);
+    $row = mysqli_fetch_array($result);
+
+    $count = $row['cntUser'];
+
+    if($count > 0){
+        $_SESSION["login"] = $uname;
+        echo 1;
+    }else{
+        echo 0;
+    }
+
 }
-mysqli_close($conn);
-?>
