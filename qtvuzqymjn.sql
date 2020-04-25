@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2020 at 12:41 PM
+-- Generation Time: Apr 25, 2020 at 06:07 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -88,7 +88,10 @@ INSERT INTO `booking` (`booking_id`, `user_id`, `bus_name`, `bus_id`, `no_of_sea
 (53, 'kiruthigait2000@gmail.com', 'deepan express', 111, 2, 'tambaram', 'potheri', '2020-04-01', 'Air', 500, 1000),
 (54, 'deepan@gmail.com', 'deepan express', 111, 1, 'vandalur', 'potheri', '2020-04-01', 'Air', 500, 500),
 (55, 'dhya01m@gmail.com', 'deepan express', 111, 1, 'chrompet', 'urappakkam', '2020-04-03', 'Air', 500, 500),
-(56, 'Shobicaanand@gmail.com ', 'deepan express', 111, 2, 'chrompet', 'tambaram', '2020-04-08', 'Air', 500, 1000);
+(56, 'Shobicaanand@gmail.com ', 'deepan express', 111, 2, 'chrompet', 'tambaram', '2020-04-08', 'Air', 500, 1000),
+(57, 'srdeepansr@gmail.com', 'deepan express', 111, 2, 'tambaram sanatorium', 'guduvancheri', '2020-04-02', 'Air', 500, 1000),
+(58, 'srdeepansr@gmail.com', 'deepan vishwa express', 222, 6, 'minambakkam', 'perungalathur', '2020-04-08', 'A/C Sleeper', 1000, 6000),
+(59, 'srdeepansr@gmail.com', 'deepan express', 111, 1, 'perungalathur', 'potheri', '2020-04-03', 'Air', 500, 500);
 
 -- --------------------------------------------------------
 
@@ -134,8 +137,8 @@ CREATE TABLE `date` (
 
 INSERT INTO `date` (`bus_id`, `date_`, `available_seats`) VALUES
 ('111', '2020-04-01', 38),
-('111', '2020-04-02', 40),
-('111', '2020-04-03', 39),
+('111', '2020-04-02', 38),
+('111', '2020-04-03', 38),
 ('111', '2020-04-04', 19),
 ('111', '2020-04-05', 0),
 ('111', '2020-04-06', 38),
@@ -146,7 +149,7 @@ INSERT INTO `date` (`bus_id`, `date_`, `available_seats`) VALUES
 ('222', '2020-04-05', 32),
 ('222', '2020-04-06', 36),
 ('222', '2020-04-07', 36),
-('222', '2020-04-08', 40),
+('222', '2020-04-08', 34),
 ('222', '2020-04-09', 37),
 ('222', '2020-04-10', 40),
 ('222', '2020-04-11', 40),
@@ -196,20 +199,21 @@ CREATE TABLE `db` (
   `email` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `pw` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
   `status` int(10) NOT NULL,
-  `activationcode` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `activationcode` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `fcode` varchar(250) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `db`
 --
 
-INSERT INTO `db` (`fname`, `lname`, `email`, `pw`, `status`, `activationcode`) VALUES
-('dee', 'vish', 'deepan@gmail.com', '1111111111', 0, 'manual'),
-('sandhya', 'm', 'dhya01m@gmail.com', 'sandhya0505', 1, '02815f652eee81121e015544eaaad6e9'),
-('kiruthiga', 'dhanuskodi', 'kiruthigait2000@gmail.com', 'kiru2000', 1, 'f1b377bd7d093ff27179940d8a22c1d0'),
-('Shobica', 'Anand', 'shobicaanand@gmail.com', 'srmuniv', 1, 'f812b31c3b843c99cf61c165f19167f5'),
-('Deepan', 'Vishwa', 'srdeepansr@gmail.com', '1234567890', 1, 'ac8aa57954ceee18a30b0b61aa483d13'),
-('Vignesh', 'S R', 'srvigneshsr@gmail.com', '1234567890', 1, '9163bdadf24ddf8294b6b8dd535d60f8');
+INSERT INTO `db` (`fname`, `lname`, `email`, `pw`, `status`, `activationcode`, `fcode`) VALUES
+('dee', 'vish', 'deepan@gmail.com', '1111111111', 0, 'manual', ''),
+('sandhya', 'm', 'dhya01m@gmail.com', 'sandhya0505', 1, '02815f652eee81121e015544eaaad6e9', ''),
+('kiruthiga', 'dhanuskodi', 'kiruthigait2000@gmail.com', 'kiru2000', 1, 'f1b377bd7d093ff27179940d8a22c1d0', ''),
+('Shobica', 'Anand', 'shobicaanand@gmail.com', 'srmuniv', 1, 'f812b31c3b843c99cf61c165f19167f5', ''),
+('Deepan', 'Vishwa', 'srdeepansr@gmail.com', 'deepan', 1, '41a7bf6d222051e969070cf7993d19b5', 'edcf4fc8591e6e6825e7fe3a61aab035'),
+('Vignesh', 'S R', 'srvigneshsr@gmail.com', '1234567890', 1, '9163bdadf24ddf8294b6b8dd535d60f8', '');
 
 --
 -- Indexes for dumped tables
@@ -241,7 +245,7 @@ ALTER TABLE `db`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `booking_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
