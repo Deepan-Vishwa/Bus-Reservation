@@ -1,70 +1,164 @@
 <!DOCTYPE html>
-<!-- Code By Webdevtrick ( https://webdevtrick.com ) -->
-<html lang="en" >
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script language="javascript">
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Bus Reservation</title>
+        <link href="styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    </head>
+    <body style="background-image: url(b.png);">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5" style="background-color: rgba(0,0,0,0.5);">
+                                    <div class="card-header">
+                                      <h3 class="text-center font-weight-light my-4" style="color: white; font-family:'Pacifico', cursive; font-size: 40px;">Welcome</h3>
+                                      <h4 class="text-center font-weight-light my-4" style="color: white; font-family:'Pacifico', cursive; font-size: 20px;">Sign up here to book your Journy</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="small mb-3 text-white" style="">Verification Mail Will be Sent To Your Email ID To Activate Your Account.</div>
+                                        <div id="mess" class="" role="alert" hidden="true"></div>
+                                        <form method="POST">
+                                          <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              <label class="small mb-1" for="fname" style="color: white;">First Name</label>
+                                            <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
+                                            
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label class="small mb-1" for="lname" style="color: white;">Last Name</label>
+                                            <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" required>
+                                            
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                          <div class="form-group col-md-12">
+                                            <label class="small mb-1" for="email" style="color: white;">Email ID</label>
+                                          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                          
+                                          </div>
+                                          
+                                      </div>
+                                        <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="npass" style="color: white;">New Password</label>
+                                          <input type="text" class="form-control" id="npass" name="npass" placeholder="New Password" required>
+                                          
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <label class="small mb-1" for="cpass" style="color: white;">Confirm Password</label>
+                                          <input type="text" class="form-control" id="cpass" name="cpass" placeholder="Confirm Password" required>
+                                          
+                                          </div>
+                                      </div>
+                                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                <a class="small" href="index.html" style="font-size: 17px;">Return to login</a>
+                                                <button type="button" class="btn btn-primary" id="resetbt">
+                                                    Sign Up
+                                                </button></div>
+                                        </form>
+                                        <script>
+                                            $(document).ready(function(){
+                                          $("#resetbt").click(function(){
+                                            $("#resetbt").attr("disabled", true);
+                                              console.log("clicked");
+                                            $('#resetbt').html('<span id="load" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...');
+                                            
+                                          
+                                          var fname = $("#fname").val().trim();
+                                          var lname = $("#lname").val().trim();
+                                          var email = $("#email").val().trim();
+                                          var npass = $("#npass").val().trim();
+                                          var cpass = $("#cpass").val().trim();
+                                          
+                                          
+                                          if( fname != "" && lname != "" && cpass != "" && email != "" && npass != "" ){
+                                            if(npass == cpass){
+                                              $.ajax({
+                                                  url:'signup.php',
+                                                  type:'post',
+                                                  data:{
+                                                    fname:fname,
+                                                    lname:lname,
+                                                    cpass:cpass,
+                                                    email:email
+                                                  
+                                                  },
+                                                  success: function(data, textStatus, jqXHR)
+                                                    {
+                                                        
+                                                        $('#mess').removeClass().attr("hidden", false).toggleClass("alert alert-success").text(data.message);
+                                                            
+                                                            $('#load').remove();
+                                                            $('#resetbt').html('Sign Up');
+                                                               
+                                                            
+                                                            if(data.code==0){
+                                                                $('#mess').removeClass().attr("hidden", false).toggleClass("alert alert-danger").text(data.message);
+                                                                $("#resetbt").attr("disabled", false);
+                                                            $('#mess').text(data.message);
+                                                            $('#load').remove();
+                                                            
+                                                            $('#resetbt').html('Sign Up');
+                                                            }
+                                                        },
+                                                        error: function (data)
+                                                        {
+                                                            $('#mess').removeClass().attr("hidden", false).toggleClass("alert alert-danger").text(data.message);
+                                                            $("#resetbt").attr("disabled", false);
+                                                        
+                                                            $('#load').remove();
+                                                            
+                                                            $('#resetbt').html('Sign Up');
+                                                        }
+                                              });
+                                          }
+                                          else{
+                                            $('#mess').removeClass().attr("hidden", false).toggleClass("alert alert-warning").text("Password Mismatch.");
+                                            $('#load').remove();
+                                            $("#resetbt").attr("disabled", false);
+                                            $('#resetbt').html('Sign Up');
 
-        function check()
-        {
-        
-         if(document.form1.firstname.value=="")
-          {
-            alert("Plese Enter First Name");
-            document.form1.firstname.focus();
-            return false;
-        
-          }
-         
-         if(document.form1.lastname.value=="")
-          {
-            alert("Plese Enter Your Last Name");
-            document.form1.lastname.focus();
-            return false;
-          } 
-          if(document.form1.confirmpassword.value=="")
-          {
-            alert("Plese Enter Confirm Password");
-            document.form1.confirmpassword.focus();
-            return false;
-          }
-          if(document.form1.password.value!=document.form1.confirmpassword.value)
-          {
-            alert("Confirm Password does not matched");
-            document.form1.confirmpassword.focus();
-            return false;
-          }
-          
-          
-          }
-          
-        </script>
+                                            
+                                          }
+                                        }
+                                        else{
+                                          $('#mess').removeClass().attr("hidden", false).toggleClass("alert alert-warning").text("Please Fill all Fields.");
+                                            $('#load').remove();
+                                            $("#resetbt").attr("disabled", false);
+                                            $('#resetbt').html('Sign Up');
+                                        }
+                                          });
+                                          });
+                                          </script>
 
-  <meta charset="UTF-8">
-  <title>Bus Reservation</title>
-  <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="MyStyle.css">
-</head>
-<body>
 
-<div class="container">
-  <div class="left-section">
-    <div class="header">
-      <h1 class="animation a1">Get Started Here !</h1>
-      <h4 class="animation a2">Sign Up for a Memorable Journey!!!</h4>
-    </div>
-    <form name="form1" action="signup.php" method="POST" onsubmit="return check();">
-    <div class="form">
-        <input type="text" class="form-field animation a3" placeholder="First Name" id="firstname" name="firstname">
-        <input type="text" class="form-field animation a4" placeholder="Last Name" id="lastname" name="lastname">
-        <input type="email" class="form-field animation a5" placeholder="Email ID" id="email" name="email">
-        <input type="password" class="form-field animation a6" placeholder="Password" id="password" name="password">
-        <input type="password" class="form-field animation a7" placeholder="Confirm Password" id="confirmpassword" name="confirmpassword">
-        <button type ="submit" class="btt animation a8" name="sub">SIGN UP</button>
-    </div>
-  </div>
-  <div class="right-section"></div>
-</div>
-</form>
-</body>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="scripts.js"></script>
+    </body>
 </html>

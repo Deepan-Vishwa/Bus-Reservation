@@ -18,28 +18,6 @@ if (!isset($_SESSION["emailid"])) {
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        <script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
-</script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -88,7 +66,6 @@ if (!isset($_SESSION["emailid"])) {
                                 
                                 </nav>
                             </div>
-                            
                             
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
@@ -152,6 +129,7 @@ if (!isset($_SESSION["emailid"])) {
                                     </div>
                                 </nav>
                             </div>
+
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
                                 Insert
@@ -189,137 +167,24 @@ if (!isset($_SESSION["emailid"])) {
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        <?php echo $_SESSION["emailid"];?>
+                        <?php echo $_SESSION["emailid"];
+                        
+                        ?>
                     </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                    <h1 class="mt-4">Update a Booked Total Cost</h1>
-                    <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="bookingv.php
-">Dashboard</a></li>
-                            <li class="breadcrumb-item">Update</a></li>
-                            <li class="breadcrumb-item active">Booking</li>
-                            <li class="breadcrumb-item active">Total cost</li>
-                        </ol>
-                    <div class="card mb-4">
-                            <div class="card-body">
-                            <form class="form-inline needs-validation" id="fupform" method="POST" novalidate>
-                            <div class="input-group mb-2 col-md-4">
-                            <input list="bookingid" class="form-control" id="bid" name="bid" placeholder="Booking ID / Email ID" required>
-                                      <datalist id="bookingid">
- 
-                                    
-                                               
-                                                    <?php 
-                                                    extract($_POST);
-                                                    $dbhost = 'localhost';
-                                                    $dbuser = 'root';
-                                                    $dbpass = '';
-                                                    $dbname = 'qTVuzqyMJn';
-                                                    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-                                                    
-                                                    if(! $conn ) {
-                                                        die('Could not connect: ' . mysqli_error());
-                                                    }
-
-                                                        $sql = "SELECT booking_id,user_id FROM `booking`";
-                                                        $result = $conn->query($sql);
-                                                        if ($result->num_rows > 0) {
-
-                                                        while($row = $result->fetch_assoc()) {
-
-                                                        
-
-                                                            echo " <option value=\"".$row["booking_id"]."\">".$row["booking_id"]."-".$row["user_id"]."</option>";
-
-
-                                                    }
-                                                    }
-                                                
-                                                    
-                                                    ?>
-                                                
-
-                                      </datalist>
-
-                                
-                                <div class="invalid-feedback">
-                                       Please choose a Booking ID.
-                                   </div>
-                                  </div>
-                                  
-                             
-                               <div class="input-group mb-2 mr-sm-2">
-                               
-                                 
-                               <input type="number" class="form-control" id="tcost" name="tcost" placeholder="Total Cost" required>
-                                      
-                               <div class="invalid-feedback">
-                                       Please choose a Total Cost.
-                                   </div>
-                                  </div>
-
-                            
-
-                                  <button type="submit" id="submit" name= "submit" class="btn btn-dark mb-2">Update</button>
-                       </form>
-
-                      <script>
-
-                        $(document).ready(function() {
-                            $('#submit').on('click', function() {
-                               
-                                var bid = $('#bid').val();
-                                var tcost = $('#tcost').val();
-                                
-                                if(bid!="" && tcost!=""){
-                                    $.ajax({
-                                        url: "tcostup.php",
-                                        type: "POST",
-                                        data: {
-                                            bid: bid,
-                                            tcost: tcost
-                                            				
-                                        },
-                                        cache: false,
-                                        success: function(dataResult){
-                                            var dataResult = JSON.parse(dataResult);
-                                            if(dataResult.statusCode==200){
-                                                $("#submit").removeAttr("disabled");
-                                                $('#fupForm').find('input:text').val('');
-                                                $("#success").show();
-                                                $('#success').html('Data added successfully !');
-                                                alert("Done!"); 						
-                                            }
-                                            else if(dataResult.statusCode==201){
-                                            alert("Error occured !");
-                                            }
-                                            
-                                        }
-                                    });
-                                }
-                                else{
-                                    alert('Please fill all the field !');
-                                }
-                            });
-                        });
-                      </script>
-
-
-                            </div>
-                        </div>
                         <h1 class="mt-4">Current Bookings</h1>
                         
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-table mr-1"></i>Booking</div>
+                            <div class="card-header"><i class="fas fa-table mr-1"></i>Bookings</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
-                                        <tr>
+                                            <tr>
                                                 <th>Booking ID</th>
                                                 <th>User ID</th>
                                                 <th>Bus ID</th>

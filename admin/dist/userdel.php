@@ -196,20 +196,19 @@ if (!isset($_SESSION["emailid"])) {
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                    <h1 class="mt-4">Update a Booked Total Cost</h1>
+                    <h1 class="mt-4">Delete a User</h1>
                     <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="bookingv.php
 ">Dashboard</a></li>
-                            <li class="breadcrumb-item">Update</a></li>
-                            <li class="breadcrumb-item active">Booking</li>
-                            <li class="breadcrumb-item active">Total cost</li>
+                            <li class="breadcrumb-item">Delete</a></li>
+                            <li class="breadcrumb-item active">User</li>
                         </ol>
                     <div class="card mb-4">
                             <div class="card-body">
                             <form class="form-inline needs-validation" id="fupform" method="POST" novalidate>
                             <div class="input-group mb-2 col-md-4">
-                            <input list="bookingid" class="form-control" id="bid" name="bid" placeholder="Booking ID / Email ID" required>
-                                      <datalist id="bookingid">
+                            <input list="busid" class="form-control" id="email" name="email" placeholder="Email ID" required>
+                                      <datalist id="busid">
  
                                     
                                                
@@ -225,7 +224,7 @@ if (!isset($_SESSION["emailid"])) {
                                                         die('Could not connect: ' . mysqli_error());
                                                     }
 
-                                                        $sql = "SELECT booking_id,user_id FROM `booking`";
+                                                        $sql = "SELECT email FROM `db`";
                                                         $result = $conn->query($sql);
                                                         if ($result->num_rows > 0) {
 
@@ -233,7 +232,7 @@ if (!isset($_SESSION["emailid"])) {
 
                                                         
 
-                                                            echo " <option value=\"".$row["booking_id"]."\">".$row["booking_id"]."-".$row["user_id"]."</option>";
+                                                            echo " <option value=\"".$row["email"]."\">".$row["email"]."</option>";
 
 
                                                     }
@@ -247,106 +246,87 @@ if (!isset($_SESSION["emailid"])) {
 
                                 
                                 <div class="invalid-feedback">
-                                       Please choose a Booking ID.
+                                       Please choose a Email ID.
                                    </div>
                                   </div>
                                   
                              
-                               <div class="input-group mb-2 mr-sm-2">
                                
-                                 
-                               <input type="number" class="form-control" id="tcost" name="tcost" placeholder="Total Cost" required>
-                                      
-                               <div class="invalid-feedback">
-                                       Please choose a Total Cost.
-                                   </div>
-                                  </div>
 
                             
 
-                                  <button type="submit" id="submit" name= "submit" class="btn btn-dark mb-2">Update</button>
+                                  <button type="submit" id="submit" name= "submit" class="btn btn-dark mb-2">Delete</button>
                        </form>
-
-                      <script>
-
-                        $(document).ready(function() {
-                            $('#submit').on('click', function() {
-                               
-                                var bid = $('#bid').val();
-                                var tcost = $('#tcost').val();
-                                
-                                if(bid!="" && tcost!=""){
-                                    $.ajax({
-                                        url: "tcostup.php",
-                                        type: "POST",
-                                        data: {
-                                            bid: bid,
-                                            tcost: tcost
-                                            				
-                                        },
-                                        cache: false,
-                                        success: function(dataResult){
-                                            var dataResult = JSON.parse(dataResult);
-                                            if(dataResult.statusCode==200){
-                                                $("#submit").removeAttr("disabled");
-                                                $('#fupForm').find('input:text').val('');
-                                                $("#success").show();
-                                                $('#success').html('Data added successfully !');
-                                                alert("Done!"); 						
-                                            }
-                                            else if(dataResult.statusCode==201){
-                                            alert("Error occured !");
-                                            }
+                                <script>
+                                    $(document).ready(function() {
+                                        $('#submit').on('click', function() {
                                             
-                                        }
+                                            var email = $('#email').val();
+                                            
+                                            
+                                            if(email!=""){
+                                                $.ajax({
+                                                    url: "userdelp.php",
+                                                    type: "POST",
+                                                    data: {
+                                                        email: email
+                                                       
+                                                        			
+                                                    },
+                                                    cache: false,
+                                                    success: function(dataResult){
+                                                        var dataResult = JSON.parse(dataResult);
+                                                        if(dataResult.statusCode==200){
+                                                            $("#butsave").removeAttr("disabled");
+                                                            $('#fupForm').find('input:text').val('');
+                                                            $("#success").show();
+                                                            $('#success').html('Data added successfully !'); 
+                                                            alert("Deleted");						
+                                                        }
+                                                        else if(dataResult.statusCode==201){
+                                                        alert("Error occured !");
+                                                        }
+                                                        
+                                                    }
+                                                });
+                                            }
+                                            else{
+                                                alert('Please fill all the field !');
+                                            }
+                                        });
                                     });
-                                }
-                                else{
-                                    alert('Please fill all the field !');
-                                }
-                            });
-                        });
-                      </script>
+                                    </script>
 
 
                             </div>
                         </div>
-                        <h1 class="mt-4">Current Bookings</h1>
+                        <h1 class="mt-4">Users</h1>
                         
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-table mr-1"></i>Booking</div>
+                            <div class="card-header"><i class="fas fa-table mr-1"></i>Our Users</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
-                                                <th>Booking ID</th>
-                                                <th>User ID</th>
-                                                <th>Bus ID</th>
-                                                <th>Bus Name</th>
-                                                <th>Bus Type</th>
-                                                <th>No Of Seats</th>
-                                                <th>From</th>
-                                                <th>To</th>
-                                                <th>Travel Date</th>
-                                                <th>Cost per Seat</th>
-                                                <th>Total Cost</th>
+                                                <th>User ID/Email</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Password</th>
+                                                <th>Status</th>
+                                                <th>Activation code</th>
+                                                
                                                 
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Booking ID</th>
-                                                <th>User ID</th>
-                                                <th>Bus ID</th>
-                                                <th>Bus Name</th>
-                                                <th>Bus Type</th>
-                                                <th>No Of Seats</th>
-                                                <th>From</th>
-                                                <th>To</th>
-                                                <th>Travel Date</th>
-                                                <th>Cost per Seat</th>
-                                                <th>Total Cost</th>
+                                            <th>User ID/Email</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Password</th>
+                                                <th>Status</th>
+                                                <th>Activation code</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -362,7 +342,7 @@ if(! $conn ) {
    die('Could not connect: ' . mysqli_error());
 }
 
-$sql = "SELECT *FROM `booking`";
+$sql = "SELECT * FROM `db`";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 // output data of each row
@@ -370,17 +350,18 @@ while($row = $result->fetch_assoc()) {
     
 
     echo "<tr>" ;
-    echo " <td>".$row["booking_id"]."</td>";
-    echo " <td>".$row["user_id"]."</td>";
-    echo " <td>".$row["bus_id"]."</td>";
-    echo " <td>".$row["bus_name"]."</td>";
-    echo " <td>".$row["bus_type"]."</td>";
-    echo " <td>".$row["no_of_seats"]."</td>";
-    echo " <td>".$row["from"]."</td>";
-    echo " <td>".$row["to"]."</td>";
-    echo " <td>".$row["travel_date"]."</td>";
-    echo " <td>Rs.".$row["total_cost"]."</td>";
-    echo " <td>Rs.".$row["cost_per_seat"]."</td></tr>";
+    echo " <td>".$row["email"]."</td>";
+    echo " <td>".$row["fname"]."</td>";
+    echo " <td>".$row["lname"]."</td>";
+    echo " <td>".$row["pw"]."</td>";
+    if($row["status"] == 1){
+    echo " <td> Activated </td>";
+    }
+    else{
+    echo " <td> Not Activated </td>";
+    }
+    echo " <td>".$row["activationcode"]."</td></tr>";
+    
     
                             
 

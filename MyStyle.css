@@ -159,16 +159,19 @@ body {
 
 @media screen and (max-width: 800px) {
   .container {
+  
+    
     align-content: center;
     margin-left: 0%;
     margin-right: 0%;
     margin-top: 0px;
-    height: 177vw;
+    height: 100%;
     background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(back2.jpg);
     height: 100%;width: 100%;
     background-size: cover;
     background-position: center; 
     position: absolute;
+    
 
   
   }
@@ -176,6 +179,7 @@ body {
     margin-top: 2px;
     margin-left: 1%;
     width: 100%;
+    
   
     
   }
@@ -183,11 +187,12 @@ body {
     text-align: center;
     
   }
+  
   .form {
     width: 100%;
     align-content: center;
     padding-left: 4%;
-    width: 100%;
+
     margin-left: 8%;
     
   }
@@ -214,9 +219,9 @@ body {
     font-family: 'Rubik', sans-serif;
   }
   .left-section {
-    height: 80%;
+    height: 100%;
     overflow: auto;
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
@@ -248,6 +253,6 @@ body {
     margin-top: 10px;
     font-weight: normal;
     font-size: 15px;
-    color: #4B0082;
+    color:white;
   }
 }

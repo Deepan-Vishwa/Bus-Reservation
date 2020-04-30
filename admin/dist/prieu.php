@@ -1,3 +1,11 @@
+<?php session_start();
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+if (!isset($_SESSION["emailid"])) {
+    header('Location: index.html');
+    exit();
+}?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,10 +18,33 @@
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.php">Bus Reservation Admin</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
+            <a class="navbar-brand" href="bookingv.php
+">Bus Reservation Admin</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
             ><!-- Navbar Search-->
             
             <!-- Navbar-->
@@ -21,7 +52,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                       <a class="dropdown-item" href="login.html">Logout</a>
+                       <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -33,7 +64,8 @@
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
                            
-                            <a class="nav-link" href="index.php"
+                            <a class="nav-link" href="bookingv.php
+"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -51,10 +83,12 @@
                                     <a class="nav-link" href="userv.php">User</a>
                                     <a class="nav-link" href="busv.php">Bus</a>
                                     <a class="nav-link" href="datev.php">Date</a>
-                                    <a class="nav-link" href="index.php">Bookings</a>
+                                    <a class="nav-link" href="bookingv.php
+">Bookings</a>
                                 
                                 </nav>
                             </div>
+                           
                             
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
@@ -118,7 +152,6 @@
                                     </div>
                                 </nav>
                             </div>
-
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
                                 Insert
@@ -141,15 +174,15 @@
                             </a>
                             <div class="collapse" id="collapsePages11" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="tables.html">User</a>
-                                    <a class="nav-link" href="tables.html">Bus</a>
-                                    <a class="nav-link" href="tables.html">Date</a>
-                                    <a class="nav-link" href="tables.html">Bookings</a>
+                                <a class="nav-link" href="userdel.php">User</a>
+                                    <a class="nav-link" href="busdel.php">Bus</a>
+                                    <a class="nav-link" href="datedel.php">Date</a>
+                                    <a class="nav-link" href="bookingdel.php">Bookings</a>
                                 
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Export</div>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="exporting.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-export"></i></div>
                                 Booked Passengers</a>
                         </div>
@@ -163,42 +196,150 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Current Bookings</h1>
+                    <h1 class="mt-4">Update Bus  Price</h1>
+                    <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="bookingv.php
+">Dashboard</a></li>
+                            <li class="breadcrumb-item">Update</a></li>
+                            <li class="breadcrumb-item">Bus</a></li>
+                            <li class="breadcrumb-item active">Price</li>
+                        </ol>
+                    <div class="card mb-4">
+                            <div class="card-body">
+                            <form class="form-inline needs-validation" id="fupform" method="POST" novalidate>
+                            <div class="input-group mb-2 col-md-4">
+                            <input list="busid" class="form-control" id="bid" name="bid" placeholder="BUS ID" required>
+                                      <datalist id="busid">
+ 
+                                    
+                                               
+                                                    <?php 
+                                                    extract($_POST);
+                                                    $dbhost = 'localhost';
+                                                    $dbuser = 'root';
+                                                    $dbpass = '';
+                                                    $dbname = 'qTVuzqyMJn';
+                                                    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+                                                    
+                                                    if(! $conn ) {
+                                                        die('Could not connect: ' . mysqli_error());
+                                                    }
+
+                                                        $sql = "SELECT bus_id,bus_name FROM `busses`";
+                                                        $result = $conn->query($sql);
+                                                        if ($result->num_rows > 0) {
+
+                                                        while($row = $result->fetch_assoc()) {
+
+                                                        
+
+                                                            echo " <option value=\"".$row["bus_id"]."\">".$row["bus_id"]."-".$row["bus_name"]."</option>";
+
+
+                                                    }
+                                                    }
+                                                
+                                                    
+                                                    ?>
+                                                
+
+                                      </datalist>
+
+                                
+                                <div class="invalid-feedback">
+                                       Please choose a Booking ID.
+                                   </div>
+                                  </div>
+                                  
+                             
+                               <div class="input-group mb-2 mr-sm-2">
+                               
+                                 
+                               <input type="number" class="form-control" id="pri" name="pri" placeholder="Source" required>
+                                      
+                               <div class="invalid-feedback">
+                                       Please choose a Source.
+                                   </div>
+                                  </div>
+
+                            
+
+                                  <button type="submit" id="submit" name= "submit" class="btn btn-dark mb-2">Update</button>
+                       </form>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('#submit').on('click', function() {
+                                            
+                                            var bid = $('#bid').val();
+                                            var pri = $('#pri').val();
+                                            
+                                           
+                                            if(bid!="" && pri!=""){
+                                                $.ajax({
+                                                    url: "prieup.php",
+                                                    type: "POST",
+                                                    data: {
+                                                        bid: bid,
+                                                        pri: pri
+                                                        
+                                                        				
+                                                    },
+                                                    cache: false,
+                                                    success: function(dataResult){
+                                                        var dataResult = JSON.parse(dataResult);
+                                                        if(dataResult.statusCode==200){
+                                                            $("#butsave").removeAttr("disabled");
+                                                            $('#fupForm').find('input:text').val('');
+                                                            $("#success").show();
+                                                            $('#success').html('Data added successfully !'); 
+                                                            alert("Done");						
+                                                        }
+                                                        else if(dataResult.statusCode==201){
+                                                        alert("error");
+                                                        }
+                                                        
+                                                    }
+                                                });
+                                            }
+                                            else{
+                                                alert('Please fill all the field !');
+                                            }
+                                        });
+                                    });
+                                    </script>
+
+
+                            </div>
+                        </div>
+                        <h1 class="mt-4">Available Busses</h1>
                         
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-table mr-1"></i>Bookings</div>
+                            <div class="card-header"><i class="fas fa-table mr-1"></i>Busses</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
-                                            <tr>
-                                                <th>Booking ID</th>
-                                                <th>User ID</th>
+                                        <tr>
                                                 <th>Bus ID</th>
                                                 <th>Bus Name</th>
                                                 <th>Bus Type</th>
-                                                <th>No Of Seats</th>
-                                                <th>From</th>
-                                                <th>To</th>
-                                                <th>Travel Date</th>
-                                                <th>Cost per Seat</th>
-                                                <th>Total Cost</th>
+                                                <th>Total Seats</th>
+                                                <th>Price</th>
+                                                <th>Route</th>
+                                                <th>Time</th>
+                                                
                                                 
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Booking ID</th>
-                                                <th>User ID</th>
                                                 <th>Bus ID</th>
                                                 <th>Bus Name</th>
                                                 <th>Bus Type</th>
-                                                <th>No Of Seats</th>
-                                                <th>From</th>
-                                                <th>To</th>
-                                                <th>Travel Date</th>
-                                                <th>Cost per Seat</th>
-                                                <th>Total Cost</th>
+                                                <th>Total Seats</th>
+                                                <th>Price</th>
+                                                <th>Route</th>
+                                                <th>Time</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -214,7 +355,7 @@ if(! $conn ) {
    die('Could not connect: ' . mysqli_error());
 }
 
-$sql = "SELECT *FROM `booking`";
+$sql = "SELECT * FROM `busses`";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 // output data of each row
@@ -222,17 +363,15 @@ while($row = $result->fetch_assoc()) {
     
 
     echo "<tr>" ;
-    echo " <td>".$row["booking_id"]."</td>";
-    echo " <td>".$row["user_id"]."</td>";
     echo " <td>".$row["bus_id"]."</td>";
     echo " <td>".$row["bus_name"]."</td>";
     echo " <td>".$row["bus_type"]."</td>";
-    echo " <td>".$row["no_of_seats"]."</td>";
-    echo " <td>".$row["from"]."</td>";
-    echo " <td>".$row["to"]."</td>";
-    echo " <td>".$row["travel_date"]."</td>";
-    echo " <td>Rs.".$row["total_cost"]."</td>";
-    echo " <td>Rs.".$row["cost_per_seat"]."</td></tr>";
+    echo " <td>".$row["total_seats"]."</td>";
+    echo " <td>".$row["price"]."</td>";
+    echo " <td>".$row["route"]."</td>";
+    echo " <td>".$row["time"]."</td></tr>";
+    
+    
     
                             
 
@@ -243,12 +382,7 @@ while($row = $result->fetch_assoc()) {
 }
 
 
-echo "</table> </tbody>
-</table>
-</div>
 
-</div>
-</div>";
 
 }
 else { 

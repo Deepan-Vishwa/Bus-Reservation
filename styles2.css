@@ -1,0 +1,130 @@
+/* Made with love by Mutiullah Samim*/
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+background-image: url(bg2.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+
+.container{
+height: 100%;
+align-content: center;
+}
+
+.card{
+height: 52%;
+margin-top: auto;
+margin-bottom: auto;
+width: 40%;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #FFC312;
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: white;
+font-family: 'Righteous', cursive;
+
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color:#1E90FF;
+color: black;
+border:0 !important;
+}
+#mess{
+    height: 20%;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.login_btn{
+color: #111; 
+            background: #1E90FF; 
+            box-shadow: 0 0 50px #1E90FF; 
+width: 100px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: #0000FF;
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}
+@media screen and (max-width: 800px) {
+    #mess{
+        height: 40px;
+    }
+    .container{
+        overflow-y: auto;
+    }
+    .card{
+        
+        display: flex;
+        position: absolute;
+        height: 60%;
+margin-top: 10%;
+margin-bottom: auto;
+width: 90%;
+background-color: rgba(0,0,0,0.5) !important;
+-webkit-column-count:3;
+        -moz-column-count:3;
+        column-count:3;
+    }
+    .links{
+        font-size: 3.5vw;
+    }
+    .aa{
+        font-size: 3.5vw;
+    }
+    .card-footer{
+        
+        background-color: rgba(0,0,0,0.5) !important;
+        
+    }
+    .d-flex{
+        overflow-x: auto;
+    }
+}

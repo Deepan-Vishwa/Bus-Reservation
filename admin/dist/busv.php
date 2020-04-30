@@ -1,3 +1,11 @@
+<?php session_start();
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+if (!isset($_SESSION["emailid"])) {
+    header('Location: index.html');
+    exit();
+}?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,7 +21,8 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.php">Bus Reservation Admin</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
+            <a class="navbar-brand" href="bookingv.php
+">Bus Reservation Admin</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
             ><!-- Navbar Search-->
             
             <!-- Navbar-->
@@ -21,7 +30,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                       <a class="dropdown-item" href="login.html">Logout</a>
+                       <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -33,7 +42,8 @@
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
                            
-                            <a class="nav-link" href="index.php"
+                            <a class="nav-link" href="bookingv.php
+"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -51,7 +61,8 @@
                                     <a class="nav-link" href="userv.php">User</a>
                                     <a class="nav-link" href="busv.php">Bus</a>
                                     <a class="nav-link" href="datev.php">Date</a>
-                                    <a class="nav-link" href="index.php">Bookings</a>
+                                    <a class="nav-link" href="bookingv.php
+">Bookings</a>
                                 
                                 </nav>
                             </div>
@@ -141,22 +152,22 @@
                             </a>
                             <div class="collapse" id="collapsePages11" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="tables.html">User</a>
-                                    <a class="nav-link" href="tables.html">Bus</a>
-                                    <a class="nav-link" href="tables.html">Date</a>
-                                    <a class="nav-link" href="tables.html">Bookings</a>
+                                <a class="nav-link" href="userdel.php">User</a>
+                                    <a class="nav-link" href="busdel.php">Bus</a>
+                                    <a class="nav-link" href="datedel.php">Date</a>
+                                    <a class="nav-link" href="bookingdel.php">Bookings</a>
                                 
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Export</div>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="exporting.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-export"></i></div>
                                 Booked Passengers</a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Deepan
+                        <?php echo $_SESSION["emailid"];?>
                     </div>
                 </nav>
             </div>

@@ -196,75 +196,70 @@ if (!isset($_SESSION["emailid"])) {
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                    <h1 class="mt-4">Update a Booked Total Cost</h1>
+                    <h1 class="mt-4">Delete a Schedule</h1>
                     <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="bookingv.php
 ">Dashboard</a></li>
-                            <li class="breadcrumb-item">Update</a></li>
-                            <li class="breadcrumb-item active">Booking</li>
-                            <li class="breadcrumb-item active">Total cost</li>
+                            <li class="breadcrumb-item">Delete</a></li>
+                            <li class="breadcrumb-item active">Date</li>
                         </ol>
                     <div class="card mb-4">
                             <div class="card-body">
                             <form class="form-inline needs-validation" id="fupform" method="POST" novalidate>
-                            <div class="input-group mb-2 col-md-4">
-                            <input list="bookingid" class="form-control" id="bid" name="bid" placeholder="Booking ID / Email ID" required>
-                                      <datalist id="bookingid">
- 
-                                    
-                                               
-                                                    <?php 
-                                                    extract($_POST);
-                                                    $dbhost = 'localhost';
-                                                    $dbuser = 'root';
-                                                    $dbpass = '';
-                                                    $dbname = 'qTVuzqyMJn';
-                                                    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-                                                    
-                                                    if(! $conn ) {
-                                                        die('Could not connect: ' . mysqli_error());
-                                                    }
+                            <div class="input-group mb-2 mr-sm-2">
+                            <select class="custom-select mr-sm-2" id="busid" name="busid" required>
+                            <option>Bus ID</option>
+                                   <?php 
+                                   extract($_POST);
+                                   $dbhost = 'localhost';
+                                   $dbuser = 'root';
+                                   $dbpass = '';
+                                   $dbname = 'qTVuzqyMJn';
+                                   $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+                                   
+                                   if(! $conn ) {
+                                      die('Could not connect: ' . mysqli_error());
+                                   }
 
-                                                        $sql = "SELECT booking_id,user_id FROM `booking`";
-                                                        $result = $conn->query($sql);
-                                                        if ($result->num_rows > 0) {
+                                      $sql = "SELECT bus_id,bus_name FROM `busses`";
+                                      $result = $conn->query($sql);
+                                      if ($result->num_rows > 0) {
 
-                                                        while($row = $result->fetch_assoc()) {
+                                       while($row = $result->fetch_assoc()) {
 
-                                                        
+                                       
 
-                                                            echo " <option value=\"".$row["booking_id"]."\">".$row["booking_id"]."-".$row["user_id"]."</option>";
+                                        echo " <option value=\"".$row["bus_id"]."\">".$row["bus_id"]."-".$row["bus_name"]."</option>";
 
 
-                                                    }
-                                                    }
-                                                
-                                                    
-                                                    ?>
-                                                
-
-                                      </datalist>
-
+                                   }
+                                }
+                            
+                                   
+                                   
+                                   
+                                   ?>
+                            </select>
                                 
                                 <div class="invalid-feedback">
-                                       Please choose a Booking ID.
+                                       Please choose a Bus ID
                                    </div>
                                   </div>
-                                  
+
                              
                                <div class="input-group mb-2 mr-sm-2">
-                               
-                                 
-                               <input type="number" class="form-control" id="tcost" name="tcost" placeholder="Total Cost" required>
-                                      
+                                 <div class="input-group-prepend">
+                                 <div class="input-group-text">Date</div>
+                                 </div>
+                               <input type="date" class="form-control" id="date" name="date"  required>
                                <div class="invalid-feedback">
-                                       Please choose a Total Cost.
+                                       Please choose a Date
                                    </div>
                                   </div>
 
                             
 
-                                  <button type="submit" id="submit" name= "submit" class="btn btn-dark mb-2">Update</button>
+                                  <button type="submit" id="submit" name= "submit" class="btn btn-dark mb-2">Delete</button>
                        </form>
 
                       <script>
@@ -272,16 +267,16 @@ if (!isset($_SESSION["emailid"])) {
                         $(document).ready(function() {
                             $('#submit').on('click', function() {
                                
-                                var bid = $('#bid').val();
-                                var tcost = $('#tcost').val();
+                                var busid = $('#busid').val();
+                                var date = $('#date').val();
                                 
-                                if(bid!="" && tcost!=""){
+                                if(busid!="" && date!=""){
                                     $.ajax({
-                                        url: "tcostup.php",
+                                        url: "datedelp.php",
                                         type: "POST",
                                         data: {
-                                            bid: bid,
-                                            tcost: tcost
+                                            busid: busid,
+                                            date: date
                                             				
                                         },
                                         cache: false,
@@ -292,7 +287,7 @@ if (!isset($_SESSION["emailid"])) {
                                                 $('#fupForm').find('input:text').val('');
                                                 $("#success").show();
                                                 $('#success').html('Data added successfully !');
-                                                alert("Done!"); 						
+                                                alert("Deleted!"); 						
                                             }
                                             else if(dataResult.statusCode==201){
                                             alert("Error occured !");
@@ -311,42 +306,28 @@ if (!isset($_SESSION["emailid"])) {
 
                             </div>
                         </div>
-                        <h1 class="mt-4">Current Bookings</h1>
+                        <h1 class="mt-4">Schedule</h1>
                         
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-table mr-1"></i>Booking</div>
+                            <div class="card-header"><i class="fas fa-table mr-1"></i>Date</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
-                                        <tr>
-                                                <th>Booking ID</th>
-                                                <th>User ID</th>
+                                            <tr>
                                                 <th>Bus ID</th>
-                                                <th>Bus Name</th>
-                                                <th>Bus Type</th>
-                                                <th>No Of Seats</th>
-                                                <th>From</th>
-                                                <th>To</th>
-                                                <th>Travel Date</th>
-                                                <th>Cost per Seat</th>
-                                                <th>Total Cost</th>
+                                                <th>Date</th>
+                                                <th>Available Seats</th>
+                                                
+                                                
                                                 
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Booking ID</th>
-                                                <th>User ID</th>
-                                                <th>Bus ID</th>
-                                                <th>Bus Name</th>
-                                                <th>Bus Type</th>
-                                                <th>No Of Seats</th>
-                                                <th>From</th>
-                                                <th>To</th>
-                                                <th>Travel Date</th>
-                                                <th>Cost per Seat</th>
-                                                <th>Total Cost</th>
+                                            <th>Bus ID</th>
+                                                <th>Date</th>
+                                                <th>Available Seats</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -362,7 +343,7 @@ if(! $conn ) {
    die('Could not connect: ' . mysqli_error());
 }
 
-$sql = "SELECT *FROM `booking`";
+$sql = "SELECT * FROM `date`";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 // output data of each row
@@ -370,17 +351,11 @@ while($row = $result->fetch_assoc()) {
     
 
     echo "<tr>" ;
-    echo " <td>".$row["booking_id"]."</td>";
-    echo " <td>".$row["user_id"]."</td>";
     echo " <td>".$row["bus_id"]."</td>";
-    echo " <td>".$row["bus_name"]."</td>";
-    echo " <td>".$row["bus_type"]."</td>";
-    echo " <td>".$row["no_of_seats"]."</td>";
-    echo " <td>".$row["from"]."</td>";
-    echo " <td>".$row["to"]."</td>";
-    echo " <td>".$row["travel_date"]."</td>";
-    echo " <td>Rs.".$row["total_cost"]."</td>";
-    echo " <td>Rs.".$row["cost_per_seat"]."</td></tr>";
+    echo " <td>".$row["date_"]."</td>";
+    echo " <td>".$row["available_seats"]."</td></tr>";
+    
+    
     
                             
 
@@ -391,12 +366,7 @@ while($row = $result->fetch_assoc()) {
 }
 
 
-echo "</table> </tbody>
-</table>
-</div>
 
-</div>
-</div>";
 
 }
 else { 
