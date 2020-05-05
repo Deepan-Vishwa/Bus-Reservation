@@ -1,5 +1,9 @@
 <?php
 session_start();
+$file = fopen("url.txt","r");
+$size= filesize("url.txt");
+$text = fread($file,$size);
+fclose($file);
 header('Content-Type: application/json');
 $host = "localhost"; /* Host name */
 $user = "root"; /* User */
@@ -35,7 +39,7 @@ if ($uname != ""){
         
         mail($uname,"Bus-Reservation Password Recovery","<html></body><div><div>Dear user,</div></br></br>
         <div style='padding-top:8px;'>Please click The following link To Reset Your Password</div>
-        <div style='padding-top:10px;'><a href='http://localhost/Bus-Reservation/newpass.html?code=$activationcode'>Click Here</a></div>
+        <div style='padding-top:10px;'><a href='$text/Bus-Reservation/newpass.html?code=$activationcode'>Click Here</a></div>
         <div style='padding-top:4px;'>Thank you!</a></div></div>
         </body></html>",$headers);
               

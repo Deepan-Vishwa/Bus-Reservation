@@ -40,9 +40,7 @@ session_start();
                 <li class="nav-item" style="padding-right: 5px;">
                     <a class="nav-link" href="help.php">Help</a>
                   </li>
-                  <li class="nav-item" style="padding-right: 5px;">
-                    <a class="nav-link" href="faq.php">FAQ</a>
-                  </li>
+                  
                
               </ul>
             </div>

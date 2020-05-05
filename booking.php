@@ -21,8 +21,20 @@ extract($_POST);
 
         <script>
             function cal(){
+
+
+              var seat = <?php echo $avails ?>;
+              console.log(seat);
                 var input = document.getElementById('in').value;
+                
                 var result = input *<?php echo $price ?>;
+                console.log(input);
+                if(input >0 && input <= seat){
+                  document.getElementById("bookbt").disabled = false;
+                }
+                else{
+                  document.getElementById("bookbt").disabled = true;
+                }
                 if(!isNaN(result)){
             document.getElementById('res').innerHTML = result;
             document.getElementById('res2').innerHTML = result;
@@ -70,9 +82,7 @@ extract($_POST);
                 <li class="nav-item" style="padding-right: 5px;">
                     <a class="nav-link" href="help.php">Help</a>
                   </li>
-                  <li class="nav-item" style="padding-right: 5px;">
-                    <a class="nav-link" href="faq.php">FAQ</a>
-                  </li>
+                  
                
               </ul>
             </div>
@@ -97,10 +107,10 @@ extract($_POST);
                 <p class="card-text text-center text-primary c8"><span class="badge badge-success cs1" >Departure Time:</span><?php echo $bdtime ?></p>
                 <p class="card-text text-center text-primary c9"><span class="badge badge-success cs1" >Arrival Time:</span><?php echo $batime ?></p>
                 <p class="card-text text-center text-primary c10"><span class="badge badge-success cs2">Your ID:</span><?php echo $user ?></p>
-                <input class="form-control align" type="number" id="in" name="seats" placeholder="Enter No of Seats" onkeyup="cal()">
+                <input class="form-control align" type="number" id="in" name="seats" placeholder="Enter No of Seats" min="1" max="<?php echo $avails ?>" onkeyup="cal()">
                 <h5 class="card-text text-center text-primary c11"><span class="badge badge-success cs3">Total Cost:</span><span class="text-primary cs3" id="res" ></span></h4>
                 
-                <button type="button" class="btn btn-primary c12" data-toggle="modal" data-target="#exampleModal" data-target="confirmmodal" >Book</button>
+                <button type="button" disabled= "true" class="btn btn-primary c12" data-toggle="modal" data-target="#exampleModal" id="bookbt" data-target="confirmmodal" >Book</button>
               </div>
             </div>
           

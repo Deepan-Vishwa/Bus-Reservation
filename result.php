@@ -1,5 +1,6 @@
 
 <?php
+
 session_start();
 ?>
 <html>
@@ -40,9 +41,7 @@ session_start();
                 <li class="nav-item" style="padding-right: 5px;">
                     <a class="nav-link" href="help.php">Help</a>
                   </li>
-                  <li class="nav-item" style="padding-right: 5px;">
-                    <a class="nav-link" href="faq.php">FAQ</a>
-                  </li>
+                  
                
               </ul>
             </div>
@@ -80,7 +79,6 @@ $dbuser = 'root';
 $dbpass = '';
 $dbname = 'qTVuzqyMJn';
 $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
 if(! $conn ) {
    die('Could not connect: ' . mysqli_error());
 }
@@ -96,20 +94,21 @@ if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
     $stops= explode(";",$row["route"]);
     $times= explode(";",$row["time"]);
-    $entry = array_search($from, $stops);
-	  $exit = array_search($to, $stops);
-
+    $entry = array_search(strtolower($from), $stops);
+    $exit = array_search(strtolower($to), $stops);
+  
     echo "<tr>" ;
   
     echo "<td>".$row["bus_name"]."</td>";
     echo " <td>".$row["bus_type"]."</td>";
-
     $i=$entry;
-		
+    
 	 	while ($i <= $exit) {
+      
 	 		$time[]=$times[$i];
 	 		$i++;
-		 }
+     }
+    
 		 echo "<td>".$time[0]."</td>";
 		 echo "<td>".end($time)."</td>";
     
@@ -136,6 +135,7 @@ while($row = $result->fetch_assoc()) {
                             <input type=\"hidden\" name=\"bfrom\" value=\"".$from."\">
                             <input type=\"hidden\" name=\"bto\" value=\"".$to."\">
                             <input type=\"hidden\" name=\"bdate\" value=\"".$date."\">
+                            <input type=\"hidden\" name=\"avails\" value=\"".$row["available_seats"]."\">
                             <input type=\"hidden\" name=\"bdtime\" value=\"".$time[0]."\">
                             <input type=\"hidden\" name=\"batime\" value=\"".end($time)."\">
                             

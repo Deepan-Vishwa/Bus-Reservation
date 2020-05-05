@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+$file = fopen("url.txt","r");
+$size= filesize("url.txt");
+$text = fread($file,$size);
+fclose($file);
 extract($_POST);
 header('Content-Type: application/json');
 $host = "localhost"; /* Host name */
@@ -18,6 +23,7 @@ $uname = mysqli_real_escape_string($con,$email);
 
 
 if ($uname != ""){
+  
 
     $sql_query = "select count(*) as cntUser from db where email='".$uname."'";
     $result = mysqli_query($con,$sql_query);
@@ -26,6 +32,7 @@ if ($uname != ""){
     $count = $row['cntUser'];
 
     if($count == 0){
+     
       $activationcode=md5($uname.time());
       $resultss=mysqli_query($con,"INSERT INTO db (fname, lname, email, pw, status, activationcode)
       VALUES ('$fname', '$lname', '$email', '$cpass', 0 , '$activationcode')");
@@ -37,7 +44,7 @@ if ($uname != ""){
         
         mail($uname,"Bus-Reservation Account Activation","<html></body><div><div>Dear user,</div></br></br>
         <div style='padding-top:8px;'>Please click The following link To Activate Your Account.</div>
-        <div style='padding-top:10px;'><a href='http://localhost/Bus-Reservation/emailconfirmation.html?code=$activationcode'>Click Here</a></div>
+        <div style='padding-top:10px;'><a href='$text/Bus-Reservation/emailconfirmation.html?code=$activationcode'>Click Here</a></div>
         <div style='padding-top:4px;'>Thank you!</a></div></div>
         </body></html>",$headers);
               

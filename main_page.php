@@ -20,13 +20,13 @@ if (!isset($_SESSION["login"])) {
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
         <link href="animation.css" rel="stylesheet" type="text/css">
-        
+        <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
 
         
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-            <a class="navbar-brand" href="#"><img src="logo.png" style="height: 30px; padding-left: 20px;"></a>
+            <a class="navbar-brand" href="main_page.php" style="font-family: 'Parisienne', cursive;">DeepanVishwa</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,9 +51,7 @@ if (!isset($_SESSION["login"])) {
                 <li class="nav-item" style="padding-right: 5px;">
                     <a class="nav-link" href="help.php">Help</a>
                   </li>
-                  <li class="nav-item" style="padding-right: 5px;">
-                    <a class="nav-link" href="faq.php">FAQ</a>
-                  </li>
+                  
                 
               </ul>
             </div>
@@ -67,57 +65,70 @@ if (!isset($_SESSION["login"])) {
                 
             <div class="ali1">
               <form class="form-inline" style="width:100%" action="result.php" method="POST">
-              <select class="form-control animation a2 ali"  id="from" name="from">
-                <option>From</option>
-                <option value="chennai beach">Chennai Beach</option>
-                <option value="chennai fort">Chennai Fort</option>
-                <option value="chennai park">Chennai Park</option>
-                <option value="chetpet">Chetpet</option>
-                <option value="nungambakkam">Nungambakkam</option>
-                <option value="kodambakkam">Kodambakkam</option>
-                <option value="mambalam">Mambalam</option>
-                <option value="saidapet">Saidapet</option>
-                <option value="guindy">Guindy</option>
-                <option value="st thomas mount">St Thomas Mount</option>
-                <option value="palavanthangal">Palavanthangal</option>
-                <option value="minambakkam">Minambakkam</option>
-                <option value="tirusulam">Tirusulam</option>
-                <option value="chrompet">Chrompet</option>
-                <option value="tambaram sanatorium">Tambaram Sanatorium</option>
-                <option value="tambaram">Tambaram</option>
-                <option value="perungalathur">Perungalathur</option>
-                <option value="vandalur">Vandalur</option>
-                <option value="urappakkam">Urappakkam</option>
-                <option value="guduvancheri">Guduvancheri</option>
-                <option value="potheri">Potheri</option>
+              <select class="form-control animation a2 ali"  id="from" name="from" required>
+              <option>From</option>
+              <?php 
+                                                    extract($_POST);
+                                                    $dbhost = 'localhost';
+                                                    $dbuser = 'root';
+                                                    $dbpass = '';
+                                                    $dbname = 'qTVuzqyMJn';
+                                                    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+                                                    
+                                                    if(! $conn ) {
+                                                        die('Could not connect: ' . mysqli_error());
+                                                    }
 
-              
+                                                        $sql = "SELECT name FROM `place`";
+                                                        $result = $conn->query($sql);
+                                                        if ($result->num_rows > 0) {
+
+                                                        while($row = $result->fetch_assoc()) {
+
+                                                        
+
+                                                            echo " <option value=\"".$row["name"]."\">".$row["name"]."</option>";
+
+
+                                                    }
+                                                    }
+                                                
+                                                    
+                                                    ?>
+
               </select>
-              <select class="form-control animation a3 ali" id="to" name="to">
-                <option>To</option>
-                <option value="chennai beach">Chennai Beach</option>
-                <option value="chennai fort">Chennai Fort</option>
-                <option value="chennai park">Chennai Park</option>
-                <option value="chetpet">Chetpet</option>
-                <option value="nungambakkam">Nungambakkam</option>
-                <option value="kodambakkam">Kodambakkam</option>
-                <option value="mambalam">Mambalam</option>
-                <option value="saidapet">Saidapet</option>
-                <option value="guindy">Guindy</option>
-                <option value="st thomas mount">St Thomas Mount</option>
-                <option value="palavanthangal">Palavanthangal</option>
-                <option value="minambakkam">Minambakkam</option>
-                <option value="tirusulam">Tirusulam</option>
-                <option value="chrompet">Chrompet</option>
-                <option value="tambaram sanatorium">Tambaram Sanatorium</option>
-                <option value="tambaram">Tambaram</option>
-                <option value="perungalathur">Perungalathur</option>
-                <option value="vandalur">Vandalur</option>
-                <option value="urappakkam">Urappakkam</option>
-                <option value="guduvancheri">Guduvancheri</option>
-                <option value="potheri">Potheri</option>
+              <select class="form-control animation a3 ali" id="to" name="to" required>
+              <option>To</option>
+              <?php 
+                                                    extract($_POST);
+                                                    $dbhost = 'localhost';
+                                                    $dbuser = 'root';
+                                                    $dbpass = '';
+                                                    $dbname = 'qTVuzqyMJn';
+                                                    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+                                                    
+                                                    if(! $conn ) {
+                                                        die('Could not connect: ' . mysqli_error());
+                                                    }
+
+                                                        $sql = "SELECT name FROM `place`";
+                                                        $result = $conn->query($sql);
+                                                        if ($result->num_rows > 0) {
+
+                                                        while($row = $result->fetch_assoc()) {
+
+                                                        
+
+                                                            echo " <option value=\"".$row["name"]."\">".$row["name"]."</option>";
+
+
+                                                    }
+                                                    }
+                                                
+                                                    
+                                                    ?>
               </select>
-              <input class="form-control animation a4 ali" type="text" id="date"  placeholder="Date" name="date" onfocus="(this.type='date')">
+              <input class="form-control animation a4 ali" type="text" id="date"  placeholder="Date" name="date" onfocus="(this.type='date')" required>
                     <button class="form-control btn btn-danger animation a5 ali" type="submit" id="search"  name="submit">Search</button>
               </form>
             </div>
