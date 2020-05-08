@@ -1,7 +1,14 @@
 
 <?php
-
 session_start();
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+if (!isset($_SESSION["login"])) {
+    header('Location: index.html');
+    exit();
+}
 ?>
 <html>
     <head>
@@ -13,10 +20,11 @@ session_start();
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <link href="animation.css" rel="stylesheet" type="text/css">
         <link href="result.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-            <a class="navbar-brand" href="#"><img src="logo.png" style="height: 30px; padding-left: 20px;"></a>
+             <a class="navbar-brand" href="main_page.php" style="font-family: 'Parisienne', cursive;">DeepanVishwa</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,7 +42,7 @@ session_start();
                     My Account
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="profile.php">Profile</a>
                     <a class="dropdown-item" href="logout.php">Log Out</a>
                   </div>
                 </li>
@@ -82,6 +90,7 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 if(! $conn ) {
    die('Could not connect: ' . mysqli_error());
 }
+
 $sql = "SELECT b.bus_id,bus_name,route,time,bus_type,total_seats,price,date_,available_seats FROM busses b
 inner join date d
 on b.bus_id=d.bus_id
@@ -94,8 +103,8 @@ if ($result->num_rows > 0) {
 while($row = $result->fetch_assoc()) {
     $stops= explode(";",$row["route"]);
     $times= explode(";",$row["time"]);
-    $entry = array_search(strtolower($from), $stops);
-    $exit = array_search(strtolower($to), $stops);
+    $entry = array_search($from, $stops);
+    $exit = array_search($to, $stops);
   
     echo "<tr>" ;
   

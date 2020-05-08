@@ -1,5 +1,12 @@
 <?php
 session_start();
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+if (!isset($_SESSION["login"])) {
+    header('Location: index.html');
+    exit();
+}
 ?>
 <html>
     <head>
@@ -11,20 +18,21 @@ session_start();
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <link href="animation.css" rel="stylesheet" type="text/css">
         <link href="result.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 <!-- Bootstrap core CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
 <!-- Material Design Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/css/mdb.min.css" rel="stylesheet">
+
 <!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/js/mdb.min.js"></script>
 
@@ -33,7 +41,7 @@ session_start();
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-            <a class="navbar-brand" href="#"><img src="logo.png" style="height: 30px; padding-left: 20px;"></a>
+        <a class="navbar-brand" href="main_page.php" style="font-family: 'Parisienne', cursive;">DeepanVishwa</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -43,24 +51,23 @@ session_start();
                 <li class="nav-item " style="padding-right: 5px;">
                   <a class="nav-link" href="main_page.php">Home </a>
                 </li>
-                <li class="nav-item" style="padding-right: 5px;">
-                  <a class="nav-link" href="my_trips.php">My Trips</a>
-                </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     My Account
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="profile.php">Profile</a>
                     <a class="dropdown-item" href="logout.php">Log Out</a>
                   </div>
                 </li>
+                <li class="nav-item" style="padding-right: 5px;">
+                  <a class="nav-link" href="my_trips.php">My Trips</a>
+                </li>
+                
                 <li class="nav-item active" style="padding-right: 5px;">
                     <a class="nav-link" href="#">Help<span class="sr-only">(current)</span></a>
                   </li>
-                  <li class="nav-item" style="padding-right: 5px;">
-                    <a class="nav-link " href="faq.php">FAQ </a>
-                  </li>
+                  
                
               </ul>
             </div>
@@ -96,9 +103,9 @@ session_start();
                     <div class="col-md-6">
                         <div class="md-form mb-0">
                             
-                                <input type="text" id="name" name="name" class="form-control">
-                                <label for="name" class="">Your name</label>
-                          
+                                <input type="text" id="name" name="name" class="form-control" placeholder= "Name">
+                               
+                                <label for="message"></label>
                         </div>
                     </div>
                     <!--Grid column-->
@@ -107,9 +114,9 @@ session_start();
                     <div class="col-md-6">
                         <div class="md-form mb-0">
                             
-                                <input type="text" id="email" name="email" class="form-control">
-                                <label for="email" class="">Your email</label>
-                        
+                                <input type="text" id="email" name="email" class="form-control" placeholder= "Email">
+                                
+                                <label for="message"></label>
                         </div>
                     </div>
                     <!--Grid column-->
@@ -121,8 +128,8 @@ session_start();
                 <div class="row">
                     <div class="col-md-12">
                         <div class="md-form mb-0">
-                            <input type="text" id="subject" name="subject" class="form-control">
-                            <label for="subject" class="">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-control" placeholder= "Subject">
+                            <label for="message"></label>
                         </div>
                     </div>
                 </div>
@@ -135,8 +142,8 @@ session_start();
                     <div class="col-md-12">
 
                         <div class="md-form">
-                            <textarea type="text" id="message" name="message" class="form-control md-textarea"></textarea>
-                            <label for="message">Your message</label>
+                            <textarea type="text" id="message" name="message" class="form-control md-textarea" placeholder= "Your message"></textarea>
+                            <label for="message"></label>
                         </div>
 
                     </div>

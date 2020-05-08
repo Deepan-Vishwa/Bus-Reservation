@@ -1,5 +1,15 @@
 
+<?php
+session_start();
+extract($_POST);
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
+if (!isset($_SESSION["login"])) {
+    header('Location: index.html');
+    exit();
+}
+?>
 <html>
 <head>
 
@@ -11,6 +21,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
         <link href="animation.css" rel="stylesheet" type="text/css">
         <script type = "text/javascript" >
   function preventBack(){window.history.forward();}
@@ -20,7 +31,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-            <a class="navbar-brand" href="#"><img src="logo.png" style="height: 30px; padding-left: 20px;"></a>
+<a class="navbar-brand" href="main_page.php" style="font-family: 'Parisienne', cursive;">DeepanVishwa</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -38,7 +49,7 @@
                     My Account
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="profile.php">Profile</a>
                     <a class="dropdown-item" href="#">Log Out</a>
                   </div>
                 </li>
@@ -90,7 +101,7 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
           
             
-            echo "<div class=\"modal fade\" id=\"exampleModal2\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel2\" aria-hidden=\"true\">
+            echo "<div class=\"modal fade\" id=\"exampleModal2\" tabindex=\"-1\" role=\"dialog\" data-controls-modal=\"your_div_id\" data-backdrop=\"static\" data-keyboard=\"false\" aria-labelledby=\"exampleModalLabel2\" aria-hidden=\"true\">
             <div class=\"modal-dialog\" role=\"document\">
               <div class=\"modal-content\">
                 <div class=\"modal-header\">
@@ -103,7 +114,7 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
                 </div>
                 <div class=\"modal-footer\">
                   
-                  <button type=\"button\" class=\"btn btn-primary\" onclick=\"location.href='/main_page.php'\">Go To HomePage</button>
+                  <a type=\"button\" class=\"btn btn-primary\" href='main_page.php'>Go To HomePage</a>
                 </div>
               </div>
             </div>
@@ -112,7 +123,8 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
           echo '
           
-          <script> $("#exampleModal2").modal("show");
+          <script>
+          $("#exampleModal2").modal("show");
           
           
           </script>';

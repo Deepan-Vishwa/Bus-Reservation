@@ -85,6 +85,7 @@ if (!isset($_SESSION["emailid"])) {
                                     <a class="nav-link" href="datev.php">Date</a>
                                     <a class="nav-link" href="bookingv.php
 ">Bookings</a>
+<a class="nav-link" href="placev.php">Place</a>
                                 
                                 </nav>
                             </div>
@@ -97,6 +98,7 @@ if (!isset($_SESSION["emailid"])) {
                             ></a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link" href="placeu.php">Place</a>
                                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth"
                                         >User
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
@@ -163,7 +165,7 @@ if (!isset($_SESSION["emailid"])) {
                                     <a class="nav-link" href="busi.php">Bus</a>
                                     <a class="nav-link" href="bookingi.php">Booking</a>
                                     <a class="nav-link" href="useri.php">User</a>
-                                    
+                                    <a class="nav-link" href="placei.php">Place</a>
                                 
                                 </nav>
                             </div>
@@ -178,7 +180,7 @@ if (!isset($_SESSION["emailid"])) {
                                     <a class="nav-link" href="busdel.php">Bus</a>
                                     <a class="nav-link" href="datedel.php">Date</a>
                                     <a class="nav-link" href="bookingdel.php">Bookings</a>
-                                
+                                    <a class="nav-link" href="placedel.php">Place</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Export</div>
@@ -392,18 +394,7 @@ $conn->close();
                         </div>
                     </div>
                 </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2019</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
+               
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>

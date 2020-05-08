@@ -13,8 +13,7 @@ die('Could not connect: ' . mysqli_error());
 
 
 
-$sql = "INSERT INTO `date`( `available_seats`,`bus_id`, `date_`) 
-SELECT total_seats, $busid , '$date' from busses WHERE bus_id = $busid";
+$sql = "UPDATE `place` SET `name`='$pname' WHERE id='$placeid'";
 if (mysqli_query($conn, $sql)) {
     echo json_encode(array("statusCode"=>200));
 } 

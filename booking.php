@@ -2,6 +2,13 @@
 <?php
 session_start();
 extract($_POST);
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+if (!isset($_SESSION["login"])) {
+    header('Location: index.html');
+    exit();
+}
 
 ?>
 <html>
@@ -18,17 +25,17 @@ extract($_POST);
         <link href="animation.css" rel="stylesheet" type="text/css">
         <link href="booking.css" rel="stylesheet" type="text/css">
 
-
+        <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
         <script>
             function cal(){
 
 
               var seat = <?php echo $avails ?>;
-              console.log(seat);
+             
                 var input = document.getElementById('in').value;
                 
                 var result = input *<?php echo $price ?>;
-                console.log(input);
+             
                 if(input >0 && input <= seat){
                   document.getElementById("bookbt").disabled = false;
                 }
@@ -57,7 +64,7 @@ extract($_POST);
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-            <a class="navbar-brand" href="#"><img src="logo.png" style="height: 30px; padding-left: 20px;"></a>
+        <a class="navbar-brand" href="main_page.php" style="font-family: 'Parisienne', cursive;">DeepanVishwa</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -75,7 +82,7 @@ extract($_POST);
                     My Account
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="profile.php">Profile</a>
                     <a class="dropdown-item" href="logout.php">Log Out</a>
                   </div>
                 </li>
@@ -122,7 +129,7 @@ extract($_POST);
 
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" data-controls-modal="your_div_id" data-backdrop="static" data-keyboard="false" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

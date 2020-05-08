@@ -21,8 +21,20 @@ if (!isset($_SESSION["login"])) {
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
         <link href="animation.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+       
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-        
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+        <script>
+         $(function() {
+    $( "#date" ).datepicker({ 
+      dateFormat: 'yy-mm-dd',
+      minDate: 1});
+  });
+        </script>
+
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
@@ -44,7 +56,7 @@ if (!isset($_SESSION["login"])) {
                     My Account
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="profile.php">Profile</a>
                     <a class="dropdown-item" href="logout.php">Log Out</a>
                   </div>
                 </li>
@@ -128,7 +140,7 @@ if (!isset($_SESSION["login"])) {
                                                     
                                                     ?>
               </select>
-              <input class="form-control animation a4 ali" type="text" id="date"  placeholder="Date" name="date" onfocus="(this.type='date')" required>
+              <input class="form-control animation a4 ali" type="text" id="date"  placeholder="Date" name="date"  required>
                     <button class="form-control btn btn-danger animation a5 ali" type="submit" id="search"  name="submit">Search</button>
               </form>
             </div>

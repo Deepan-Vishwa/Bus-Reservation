@@ -89,7 +89,7 @@ if (!isset($_SESSION["emailid"])) {
                                 
                                 </nav>
                             </div>
-                           
+                            
                             
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
@@ -198,74 +198,66 @@ if (!isset($_SESSION["emailid"])) {
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                    <h1 class="mt-4">Update a User Last Name</h1>
+                    <h1 class="mt-4">Insert a Stop</h1>
                     <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="bookingv.php
 ">Dashboard</a></li>
-                            <li class="breadcrumb-item">Update</a></li>
-                            <li class="breadcrumb-item active">User</li>
-                            <li class="breadcrumb-item active">Last Name</li>
+                            <li class="breadcrumb-item">Insert</a></li>
+                            <li class="breadcrumb-item active">Place</li>
+                            
                         </ol>
                     <div class="card mb-4">
                             <div class="card-body">
                             <form class="form-inline needs-validation" id="fupform" method="POST" novalidate>
-                            <div class="input-group mb-2 col-md-4">
-                            <input list="emailll" class="form-control" id="emailid" name="emailid" placeholder="User ID / Email ID" required>
-                                      <datalist id="emailll">
+                            
+                                  
+                             
+                               <div class="input-group mb-2 col-md-4">
+                                 
+                               <input list="Text" class="form-control" id="pname" name="pname" placeholder="Place Name" required>
+                               <datalist id="Text">
  
                                     
                                                
-                                                    <?php 
-                                                    extract($_POST);
-                                                    $dbhost = 'localhost';
-                                                    $dbuser = 'root';
-                                                    $dbpass = '';
-                                                    $dbname = 'qTVuzqyMJn';
-                                                    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-                                                    
-                                                    if(! $conn ) {
-                                                        die('Could not connect: ' . mysqli_error());
-                                                    }
+ <?php 
+ extract($_POST);
+ $dbhost = 'localhost';
+ $dbuser = 'root';
+ $dbpass = '';
+ $dbname = 'qTVuzqyMJn';
+ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+ 
+ if(! $conn ) {
+     die('Could not connect: ' . mysqli_error());
+ }
 
-                                                        $sql = "SELECT email FROM `db`";
-                                                        $result = $conn->query($sql);
-                                                        if ($result->num_rows > 0) {
+     $sql = "SELECT * FROM `place`";
+     $result = $conn->query($sql);
+     if ($result->num_rows > 0) {
 
-                                                        while($row = $result->fetch_assoc()) {
+     while($row = $result->fetch_assoc()) {
 
-                                                        
+     
 
-                                                            echo " <option value=\"".$row["email"]."\">";
+         echo " <option value=\"".$row["name"]."\">".$row["name"]."-".$row["id"]."</option>";
+
+ }
+ }
+
+ 
+ ?>
 
 
-                                                    }
-                                                    }
-                                                
-                                                    
-                                                    ?>
-                                                
+</datalist>
 
-                                      </datalist>
-
-                                
-                                <div class="invalid-feedback">
-                                       Please choose a Email.
-                                   </div>
-                                  </div>
-                                  
-                             
-                               <div class="input-group mb-2 mr-sm-2">
-                                 
-                               <input list="Text" class="form-control" id="lname" name="lname" placeholder="New Last Name" required>
-                                      
                                <div class="invalid-feedback">
-                                       Please Enter a Last Name.
+                                       Please Enter a Place Name.
                                    </div>
                                   </div>
 
                             
 
-                                  <button type="submit" id="submit" name= "submit" class="btn btn-dark mb-2">Update</button>
+                                  <button type="submit" id="submit" name= "submit" class="btn btn-dark mb-2">Insert</button>
                        </form>
 
                       <script>
@@ -273,16 +265,16 @@ if (!isset($_SESSION["emailid"])) {
                         $(document).ready(function() {
                             $('#submit').on('click', function() {
                                
-                                var emailid = $('#emailid').val();
-                                var lname = $('#lname').val();
+                               
+                                var pname = $('#pname').val();
                                 
-                                if(emailid!="" && lname!=""){
+                                if(pname!=""){
                                     $.ajax({
-                                        url: "lnameup.php",
+                                        url: "placeip.php",
                                         type: "POST",
                                         data: {
-                                            emailid: emailid,
-                                            lname: lname
+                                            
+                                            pname: pname
                                             				
                                         },
                                         cache: false,
@@ -312,33 +304,26 @@ if (!isset($_SESSION["emailid"])) {
 
                             </div>
                         </div>
-                        <h1 class="mt-4">Our Users</h1>
+                        <h1 class="mt-4">Our Stops</h1>
                         
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-table mr-1"></i>Users</div>
+                            <div class="card-header"><i class="fas fa-table mr-1"></i>Place</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
-                                                <th>User ID/Email</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Password</th>
-                                                <th>Status</th>
-                                                <th>Activation code</th>
+                                                <th>ID</th>
+                                                <th>Name</th>
                                                 
                                                 
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                            <th>User ID/Email</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Password</th>
-                                                <th>Status</th>
-                                                <th>Activation code</th>
+                                            <th>ID</th>
+                                                <th>Name</th>
+                                                
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -354,7 +339,7 @@ if(! $conn ) {
    die('Could not connect: ' . mysqli_error());
 }
 
-$sql = "SELECT * FROM `db`";
+$sql = "SELECT * FROM `place`";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 // output data of each row
@@ -362,25 +347,9 @@ while($row = $result->fetch_assoc()) {
     
 
     echo "<tr>" ;
-    echo " <td>".$row["email"]."</td>";
-    echo " <td>".$row["fname"]."</td>";
-    echo " <td>".$row["lname"]."</td>";
-    echo " <td>".$row["pw"]."</td>";
-    if($row["status"] == 1){
-    echo " <td> Activated </td>";
-    }
-    else{
-    echo " <td> Not Activated </td>";
-    }
-    echo " <td>".$row["activationcode"]."</td></tr>";
-    
-    
-                            
-
-                        
-                           
-                          
-                            
+    echo " <td>".$row["id"]."</td>";
+    echo " <td>".$row["name"]."</td></tr>";
+         
 }
 
 
@@ -393,7 +362,7 @@ echo "</table> </tbody>
 
 }
 else { 
-    echo "No Bookings"; 
+    echo "No Records"; 
 }
 $conn->close();
 ?>
