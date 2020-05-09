@@ -101,33 +101,33 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
           
             
-            echo "<div class=\"modal fade\" id=\"exampleModal2\" tabindex=\"-1\" role=\"dialog\" data-controls-modal=\"your_div_id\" data-backdrop=\"static\" data-keyboard=\"false\" aria-labelledby=\"exampleModalLabel2\" aria-hidden=\"true\">
-            <div class=\"modal-dialog\" role=\"document\">
-              <div class=\"modal-content\">
-                <div class=\"modal-header\">
-                  <h5 class=\"modal-title\" id=\"exampleModalLabel2\">Status</h5>
-                 
-                </div>
-                <div class=\"modal-body\">
-                  Booking Sucessfull!!!!
-                  Check Your Mail For Booking details.
-                </div>
-                <div class=\"modal-footer\">
-                  
-                  <a type=\"button\" class=\"btn btn-primary\" href='main_page.php'>Go To HomePage</a>
-                </div>
+          echo "<div class=\"modal fade\" id=\"exampleModal2\" tabindex=\"-1\" role=\"dialog\" data-controls-modal=\"your_div_id\" data-backdrop=\"static\" data-keyboard=\"false\" aria-labelledby=\"exampleModalLabel2\" aria-hidden=\"true\">
+          <div class=\"modal-dialog\" role=\"document\">
+            <div class=\"modal-content\">
+              <div class=\"modal-header\">
+                <h5 class=\"modal-title\" id=\"exampleModalLabel2\">Status</h5>
+               
+              </div>
+              <div class=\"modal-body\">
+                Booking Sucessfull!!!!
+                Check Your Mail For Booking details.
+              </div>
+              <div class=\"modal-footer\">
+                
+                <a type=\"button\" class=\"btn btn-primary\" href='main_page.php'>Go To HomePage</a>
               </div>
             </div>
-          </div>";
-          
+          </div>
+        </div>";
+        
 
-          echo '
-          
-          <script>
-          $("#exampleModal2").modal("show");
-          
-          
-          </script>';
+        echo '
+        
+        <script>
+        $("#exampleModal2").modal("show");
+        
+        
+        </script>';
 
 
           
@@ -136,7 +136,7 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
           $to=$cbuser;
           $msg= "Thanks for choosing US!!!.";
           $subject="Bus Ticket";
-          $headers .= "MIME-Version: 1.0"."\r\n";
+          $headers = "MIME-Version: 1.0"."\r\n";
           $headers .= 'Content-type: text/html; charset=iso-8859-1'."\r\n";
           $headers .= 'From:Deepan Vishwa'."\r\n";
           $ms.="<html></body><div><div>Dear user,</div></br></br>";
@@ -154,10 +154,35 @@ $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
           <div style='padding-top:4px;'>Thank You!!!</div>
           </body></html>";
           mail($to,$subject,$ms,$headers);
-          
+          echo 1;
             
          } else {
-             echo "Error: " . $sql . "<br>" . $conn->error;
+          echo "<div class=\"modal fade\" id=\"exampleModal2\" tabindex=\"-1\" role=\"dialog\" data-controls-modal=\"your_div_id\" data-backdrop=\"static\" data-keyboard=\"false\" aria-labelledby=\"exampleModalLabel2\" aria-hidden=\"true\">
+          <div class=\"modal-dialog\" role=\"document\">
+            <div class=\"modal-content\">
+              <div class=\"modal-header\">
+                <h5 class=\"modal-title\" id=\"exampleModalLabel2\">Status</h5>
+               
+              </div>
+              <div class=\"modal-body bg-danger text-white\">
+               Sorry Error With Your Booking, Contact the Support.
+              </div>
+              <div class=\"modal-footer\">
+                
+                <a type=\"button\" class=\"btn btn-primary\" href='main_page.php'>Go To HomePage</a>
+              </div>
+            </div>
+          </div>
+        </div>";
+        
+
+        echo '
+        
+        <script>
+        $("#exampleModal2").modal("show");
+        
+        
+        </script>';
          }
         }
 mysqli_close($conn);

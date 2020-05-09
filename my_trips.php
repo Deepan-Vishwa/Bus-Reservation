@@ -11,7 +11,7 @@ session_start();
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <link href="animation.css" rel="stylesheet" type="text/css">
-        <link href="result.css" rel="stylesheet" type="text/css">
+        <link href="result2.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -51,7 +51,7 @@ session_start();
           align-items:center;position:fixed;">
           <div class="container" style="max-width: 100%;">
             
-                <div class="card animation a1 " style="overflow-y: auto;max-height: 600px;">
+                <div class="card animation a1 t " style="overflow-y: auto;max-height: 600px;">
                     <div class="card-header bg-danger " style="background-color:#454d55; color: white;" >
                       Your Trips
                     </div>
