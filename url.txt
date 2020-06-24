@@ -1,1 +1,1 @@
-https://2d783c6b.ngrok.io
+http://localhost/Bus-Reservation
