@@ -1,3 +1,12 @@
+Login Credentials: 
+user:
+username: srdeepansr@gmail.com
+password: 0987654321
+
+admin:
+username: srdeepansr@gmail.com
+password: 1234567890
+
 # Bus-Reservation
  * Login Page
  * Sign up Page
